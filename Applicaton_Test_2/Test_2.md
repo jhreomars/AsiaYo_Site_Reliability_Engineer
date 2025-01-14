@@ -15,14 +15,27 @@
 目錄結構：
 ```plaintext
 .
-├── main.tf                # 主配置文件
-├── provider.tf            # AWS Provider配置
-├── variables.tf           # 變量定義
+├── main.tf               # 主配置文件
+├── provider.tf           # AWS Provider配置
+├── variables.tf          # 變量定義
 ├── outputs.tf            # 輸出定義
 ├── terraform.tfvars      # 變量值
 └── modules/              # 模組目錄
     ├── networking/       # 網路模組
-    ├── eks/             # EKS模組
+    ├── eks/              # EKS模組
+    │   ├── main.tf       # EKS 叢集主配置
+    │   ├── variables.tf
+    │   ├── outputs.tf
+    │   └── addons/      # 核心組件子模組
+    │       ├── main.tf  # 核心組件配置
+    │       ├── coredns.tf
+    │       ├── vpc_cni.tf
+    │       ├── kube_proxy.tf
+    │       ├── metrics_server.tf
+    │       ├── cluster_autoscaler.tf
+    │       ├── container_insights.tf
+    │       ├── variables.tf
+    │       └── outputs.tf
     └── ecr/             # ECR模組
 ```
 
