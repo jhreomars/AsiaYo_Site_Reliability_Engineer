@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: asiayo-app
+  namespace: asiayo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: asiayo-app
+  template:
+    metadata:
+      labels:
+        app: asiayo-app
+    spec:
+      containers:
+      - name: asiayo-app
+        image: ${ECR_REGISTRY}/asiayo-app:latest
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+          limits:
+            cpu: "1000m"
+            memory: "1Gi"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 80
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
